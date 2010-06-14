@@ -33,4 +33,4 @@ class View_MPDF extends View {
 } // End View_PDF
 
 // Load DOMPDF configuration, this will prepare DOMPDF
-require_once '/Volumes/EnerHD/ED/Repos/edit.mfc.ru/public/trunk/www/modules/mpdf/vendor/mpdf.php';
+require_once MODPATH.'mpdf/vendor/mpdf.php';
