@@ -34,3 +34,4 @@ class View_MPDF extends View {
 
 // Load DOMPDF configuration, this will prepare DOMPDF
 require_once MODPATH.'mpdf/vendor/mpdf.php';
+?>
