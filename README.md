@@ -6,7 +6,7 @@ Extension for Kohana's View class that renders as a PDF instead of HTML. Uses [M
 
 If your application is a Git repository:
 
-    git submodule add git://github.com/ener/mpdf.git modules/mpdf
+    git submodule add git://github.com/seyfer/mpdf.git modules/mpdf
     git submodule update --init
 
 Or clone the the module separately:
@@ -34,9 +34,18 @@ Edit `application/bootstrap.php` and add a the module:
 Placed in a controller action:
 
     // Load a view using the PDF extension
-    $pdf = View_MPDF::factory('pdf/example');
+    $mpdf = Kohana_MPDF::factory('pdf/example');
 
-    // Use the PDF as the request response
-    $this->request->response = $pdf;
+    //Or use it with some data and with Smarty
+    $mpdf = Kohana_MPDF::factory("pdf/example.tpl", array("data" => $data));
 
+    // Use CSS
+    $mpdf->set_css('media/css/style.css');
+    // And again. This is array.
+    $mpdf->set_css('media/css/style2.css');
 
+    //Render pdf with your html template and css
+    $mpdf->render();
+
+    //Check output with different output mode (see MPDF documentation).
+    $mpdf->output('mpdf.pdf', 'S');

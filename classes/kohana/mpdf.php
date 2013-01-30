@@ -3,11 +3,11 @@
 defined('SYSPATH') or die('No direct script access.');
 
 /**
- * Render a view as a PDF.
+ * Kohana wrapper on MPDF.
  *
- * @author     Woody Gilk <woody.gilk@kohanaphp.com>
- * @copyright  (c) 2009 Woody Gilk
- * @license    MIT
+ * @author     Seyfer <seyferseed@mail.ru>
+ * @copyright  (c) 2012 Seyfer (Oleg Abrazhaev)
+ * @license    GPL
  */
 class Kohana_MPDF {
 
@@ -49,13 +49,18 @@ class Kohana_MPDF {
      * Create instance
      * @param type $file - x.php, x.tpl if Smarty enabled
      * @param array $data - array(name, value)
-     * @return \View_MPDF
+     * @return \Kohana_MPDF
      */
     public static function factory($file = NULL, array $data = NULL)
     {
         return new Kohana_MPDF($file, $data);
     }
 
+    /**
+     * Render HTML with tpl
+     * @param type $file - tpl
+     * @return \mPDF
+     */
     public function render($file = NULL)
     {
         $file = $file ? $file : $this->file;
@@ -69,8 +74,6 @@ class Kohana_MPDF {
 
         $rhtml = $html->render();
 
-//        Debug::vars($rhtml);
-
         $charset           = $this->charset ? $this->charset : Kohana::$charset;
         $format            = $this->format ? $this->format : 'A4';
         $default_font_size = $this->default_font_size ? $this->default_font_size : "8";
@@ -83,10 +86,11 @@ class Kohana_MPDF {
             foreach ($this->css as $css)
             {
                 $stylesheet = File::getFromFile($css);
-//                Debug::vars($stylesheet, $css);
+
                 $this->mpdf->WriteHTML($stylesheet, 1);
             }
 
+        //default preferences
         $this->mpdf->SetAutoFont(AUTOFONT_ALL);
         $this->mpdf->list_indent_first_level = 0;
 
@@ -104,7 +108,7 @@ class Kohana_MPDF {
 
 }
 
-// End View_PDF
-// Load DOMPDF configuration, this will prepare DOMPDF
+// End Kohana_MPDF
+// Load mPDF configuration, this will prepare mPDF
 require_once MODPATH . 'mpdf/vendor/mpdf.php';
 ?>
