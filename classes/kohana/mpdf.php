@@ -85,7 +85,7 @@ class Kohana_MPDF {
         if (!empty($this->css))
             foreach ($this->css as $css)
             {
-                $stylesheet = File::getFromFile($css);
+                $stylesheet = file_get_contents($css);
 
                 $this->mpdf->WriteHTML($stylesheet, 1);
             }
