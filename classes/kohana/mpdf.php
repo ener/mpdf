@@ -100,10 +100,26 @@ class Kohana_MPDF {
         return $this->mpdf;
     }
 
-    //Delegate to mpdf
+    /**
+     * Delegate to mpdf
+     */
     public function output($name = '', $dest = '')
     {
         return $this->mpdf->output($name, $dest);
+    }
+
+    /**
+     * Call mpdf method if needed
+     * @param type $name
+     * @param type $arguments
+     * @return type
+     */
+    public function __call($name, $arguments)
+    {
+        if (method_exists($this->mpdf, $name))
+        {
+            return call_user_func_array(array($this->mpdf, $name), $arguments);
+        }
     }
 
 }
