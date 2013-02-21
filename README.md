@@ -2,6 +2,10 @@
 
 Extension for Kohana's View class that renders as a PDF instead of HTML. Uses [MPDF](http://www.mpdf1.com/mpdf/) to render normal HTML views as PDF Files.
 
+Forked to fix for use View rendered templates with Kohana Smarty module.
+
+mPDF version 5.6 !
+
 ## Installation
 
 If your application is a Git repository:
