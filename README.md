@@ -4,7 +4,7 @@ Extension for Kohana's View class that renders as a PDF instead of HTML. Uses [M
 
 Forked to fix for use View rendered templates with Kohana Smarty module.
 
-mPDF version 5.6 !
+mPDF version 5.7 !
 
 ## Installation
 
@@ -17,11 +17,6 @@ Or clone the the module separately:
 
     cd modules
     git clone git://github.com/seyfer/mpdf.git mpdf
-
-### Update DOMPDF
-
-    cd modules/mpdf
-    git submodule update --init
 
 ### Configuration
 
