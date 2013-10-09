@@ -69,8 +69,11 @@ class Kohana_MPDF {
         // Using View::factory for compability with Smarty and other modules.
         $html = View::factory($file);
 
-        foreach ($this->data as $name => $value)
-            $html->set($name, $value);
+        if (is_array($this->data))
+            foreach ($this->data as $name => $value)
+                $html->set($name, $value);
+        else
+            $html->set("data", $this->data);
 
         $rhtml = $html->render();
 
