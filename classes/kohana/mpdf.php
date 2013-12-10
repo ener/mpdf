@@ -21,6 +21,7 @@ class Kohana_MPDF {
     const WRITE_HTML_BODY    = 2;
     const WRITE_HTML_PARSES  = 3;
     const WRITE_HTML_HEADERS = 4;
+    const MPDF_EXT           = ".pdf";
 
     /**
      *
@@ -276,10 +277,63 @@ class Kohana_MPDF {
 
     /**
      * Delegate to mpdf
+     * @param type $name
+     * @param type $dest
+     * @return type
      */
     public function output($name = '', $dest = '')
     {
         return $this->mpdf->output($name, $dest);
+    }
+
+    /**
+     * helper function for saving tmp pdf
+     * @param type $data
+     * @param type $name
+     */
+    public function saveTmpPdfFile($data, $name)
+    {
+        $tmpFilePath = MODPATH . "/mpdf/" . $name . self::MPDF_EXT;
+
+        file_put_contents($tmpFilePath, $data);
+    }
+
+    /**
+     * turn import using mode on
+     * @return \Kohana_MPDF
+     */
+    public function setImportUse()
+    {
+        $this->checkMpdfInit();
+        $this->mpdf->SetImportUse();
+
+        return $this;
+    }
+
+    /**
+     * set file path for import
+     * @param type $filePath
+     * @return \Kohana_MPDF
+     */
+    public function setSourceFile($filePath)
+    {
+        $this->checkMpdfInit();
+        $this->mpdf->SetSourceFile($filePath);
+
+        return $this;
+    }
+
+    /**
+     * check init of mPDF
+     * @return type
+     */
+    public function checkMpdfInit()
+    {
+        if (!$this->mpdf) {
+            $this->initMpdf();
+        }
+
+        return isset($this->mpdf);
     }
 
     /**
@@ -290,6 +344,8 @@ class Kohana_MPDF {
      */
     public function __call($name, $arguments)
     {
+        $this->checkMpdfInit();
+
         if (method_exists($this->mpdf, $name)) {
             return call_user_func_array(array($this->mpdf, $name), $arguments);
         }
