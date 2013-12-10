@@ -325,9 +325,9 @@ class Kohana_MPDF {
 
         $this->checkMpdfInit();
         $this->setImportUse();
-        $pageCount = $this->setSourceFile($filePath);
+        $this->mergePdf($filePath);
 
-        return $pageCount;
+        return $this;
     }
 
     /**
@@ -375,7 +375,7 @@ class Kohana_MPDF {
 
         $pagecount = $this->setSourceFile($anotherPdfPath);
 
-        for ($i = 1; $i < $pagecount; $i++) {
+        for ($i = 1; $i <= $pagecount; $i++) {
             $this->mpdf->AddPage();
             $tplId = $this->mpdf->ImportPage($i);
             $this->mpdf->UseTemplate($tplId);
