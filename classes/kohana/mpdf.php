@@ -23,6 +23,8 @@ class Kohana_MPDF {
     const WRITE_HTML_HEADERS = 4;
     const MPDF_EXT           = ".pdf";
 
+    private $tmpDirPath;
+
     /**
      *
      * @var \mPDF
@@ -118,8 +120,9 @@ class Kohana_MPDF {
 
     public function __construct($file = NULL, $data = NULL)
     {
-        $this->data    = $data;
-        $this->tplPath = $file;
+        $this->data       = $data;
+        $this->tplPath    = $file;
+        $this->tmpDirPath = MODPATH . "mpdf/tmp/";
     }
 
     /**
@@ -134,7 +137,7 @@ class Kohana_MPDF {
     }
 
     /**
-     * init instance of mPDF wit settings
+     * init instance of mPDF with settings
      */
     public function initMpdf()
     {
@@ -293,9 +296,93 @@ class Kohana_MPDF {
      */
     public function saveTmpPdfFile($data, $name)
     {
-        $tmpFilePath = MODPATH . "/mpdf/" . $name . self::MPDF_EXT;
+        Debug::vars(__METHOD__);
 
-        file_put_contents($tmpFilePath, $data);
+        $tmpFilePath = $this->tmpDirPath . $name . self::MPDF_EXT;
+
+        Debug::vars($tmpFilePath);
+
+        if (FALSE === file_put_contents($tmpFilePath, $data)) {
+            throw new Exception(__METHOD__ . " you need chmod for writing "
+            . "on $this->tmpDirPath");
+        }
+
+        chmod($tmpFilePath, "777");
+    }
+
+    /**
+     * load from pdf
+     * @param type $filePath
+     * @return \Kohana_MPDF
+     */
+    public function loadPdfFile($fileName)
+    {
+        if (!strpos($fileName, self::MPDF_EXT)) {
+            $fileName = $fileName . self::MPDF_EXT;
+        }
+
+        $filePath = $this->tmpDirPath . $fileName;
+
+        $this->checkMpdfInit();
+        $this->setImportUse();
+        $pageCount = $this->setSourceFile($filePath);
+
+        return $pageCount;
+    }
+
+    /**
+     * delete tmp file
+     * @param string $fileName
+     * @return type
+     */
+    public function deleteTmpPdf($fileName)
+    {
+        if (!strpos($fileName, self::MPDF_EXT)) {
+            $fileName = $fileName . self::MPDF_EXT;
+        }
+
+        $filePath = $this->tmpDirPath . $fileName;
+
+        return unlink($filePath);
+    }
+
+    /**
+     * if you have pdf string, but not file
+     * you can parse it into mPDF this way
+     * @param type $pdfBinData
+     * @return int page Count
+     */
+    public function parsePdfString($pdfBinData)
+    {
+        $name = "for_parse" . rand(1, 9999999);
+        $this->saveTmpPdfFile($pdfBinData, $name);
+
+        $pageCount = $this->loadPdfFile($name);
+
+        $this->deleteTmpPdf($name);
+
+        return $pageCount;
+    }
+
+    /**
+     * merge another pdf to current
+     * @param type $anotherPdfPath
+     * @return \Kohana_MPDF
+     */
+    public function mergePdf($anotherPdfPath)
+    {
+        $this->checkMpdfInit();
+
+        $pagecount = $this->setSourceFile($anotherPdfPath);
+
+        for ($i = 1; $i < $pagecount; $i++) {
+            $this->mpdf->AddPage();
+            $tplId = $this->mpdf->ImportPage($i);
+            $this->mpdf->UseTemplate($tplId);
+            $this->mpdf->WriteHTML();
+        }
+
+        return $this;
     }
 
     /**
@@ -318,9 +405,9 @@ class Kohana_MPDF {
     public function setSourceFile($filePath)
     {
         $this->checkMpdfInit();
-        $this->mpdf->SetSourceFile($filePath);
+        $pageCount = $this->mpdf->SetSourceFile($filePath);
 
-        return $this;
+        return $pageCount;
     }
 
     /**
