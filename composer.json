@@ -1,0 +1,25 @@
+{
+    "name": "kohana-mpdf",
+    "version": "0.1.0",
+    "description": "Kohana module to manage pdf quick and easy",
+    "author": "Oleg Abrazhaev <seyferseed@mail.ru>",
+    "require": {
+        "mPDF": "5.7"
+    },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "mPDF",
+                "version": "5.7",
+                "dist": {
+                    "url": "http://mpdf1.com/repos/MPDF57.zip",
+                    "type": "zip"
+                }
+
+            }
+        }
+
+    ]
+
+}
