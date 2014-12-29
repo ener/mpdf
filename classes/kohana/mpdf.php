@@ -14,7 +14,8 @@ require_once _MPDF_PATH . 'mpdf.php';
  * @copyright  (c) 2012 Seyfer (Oleg Abrazhaev)
  * @license    GPL
  */
-class Kohana_MPDF {
+class Kohana_MPDF
+{
 
     const WRITE_DEFAULT      = 0;
     const WRITE_CSS          = 1;
@@ -186,8 +187,7 @@ class Kohana_MPDF {
             foreach ($this->data as $name => $value) {
                 $this->view->set($name, $value);
             }
-        }
-        else if (!empty($this->data)) {
+        } else if (!empty($this->data)) {
             $this->view->set("data", $this->data);
         }
     }
