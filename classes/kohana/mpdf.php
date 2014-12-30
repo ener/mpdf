@@ -2,10 +2,7 @@
 
 defined('SYSPATH') or die('No direct script access.');
 
-define('_MPDF_PATH', MODPATH . 'mpdf/vendor/mPDF/');
-
-// Load mPDF configuration, this will prepare mPDF
-require_once _MPDF_PATH . 'mpdf.php';
+//require_once MODPATH . 'mpdf/vendor/autoload.php';
 
 /**
  * Kohana wrapper on MPDF.
