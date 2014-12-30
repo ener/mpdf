@@ -4,11 +4,11 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bc2216543553c28ad77b0395916c1cba",
+    "hash": "86db148a9ae40b3af8e11055d4e09c6b",
     "packages": [
         {
             "name": "composer/installers",
-            "version": "v1.0.19",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
@@ -145,10 +145,8 @@
     ],
     "packages-dev": [],
     "aliases": [],
-    "minimum-stability": "stable",
-    "stability-flags": {
-        "mpdf/mpdf": 15
-    },
+    "minimum-stability": "dev",
+    "stability-flags": [],
     "prefer-stable": false,
     "platform": {
         "php": ">=5.4"

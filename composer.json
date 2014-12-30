@@ -17,6 +17,7 @@
         "composer/installers": "1.*",
         "mpdf/mpdf": "5.7.4a"
     },
+    "minimum-stability": "dev",
     "autoload": {
         "classmap": [
             "/"
