@@ -2,10 +2,7 @@
 
 defined('SYSPATH') or die('No direct script access.');
 
-define('_MPDF_PATH', MODPATH . 'mpdf/vendor/mPDF/');
-
-// Load mPDF configuration, this will prepare mPDF
-require_once _MPDF_PATH . 'mpdf.php';
+//require_once MODPATH . 'mpdf/vendor/autoload.php';
 
 /**
  * Kohana wrapper on MPDF.
@@ -14,7 +11,8 @@ require_once _MPDF_PATH . 'mpdf.php';
  * @copyright  (c) 2012 Seyfer (Oleg Abrazhaev)
  * @license    GPL
  */
-class Kohana_MPDF {
+class Kohana_MPDF
+{
 
     const WRITE_DEFAULT      = 0;
     const WRITE_CSS          = 1;
@@ -186,8 +184,7 @@ class Kohana_MPDF {
             foreach ($this->data as $name => $value) {
                 $this->view->set($name, $value);
             }
-        }
-        else if (!empty($this->data)) {
+        } else if (!empty($this->data)) {
             $this->view->set("data", $this->data);
         }
     }
