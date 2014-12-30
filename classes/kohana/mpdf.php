@@ -120,7 +120,7 @@ class Kohana_MPDF
     {
         $this->data       = $data;
         $this->tplPath    = $file;
-        $this->tmpDirPath = MODPATH . "mpdf/tmp/";
+        $this->tmpDirPath = MODPATH . "kohana-mpdf/tmp/";
     }
 
     /**
@@ -436,6 +436,3 @@ class Kohana_MPDF
     }
 
 }
-
-// End Kohana_MPDF
-
