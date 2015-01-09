@@ -1,6 +1,6 @@
 {
     "name": "seyfer/kohana-mpdf",
-    "version": "3.2",
+    "version": "3.3",
     "type": "kohana-module",
     "description": "Kohana module to manage pdf quick and easy",
     "type": "kohana-module",
