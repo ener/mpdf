@@ -36,7 +36,7 @@ After installation go to module folder and execute
 
     composer install
 
-This will load mPDF to module vendor. After that add to your app index.php
+This will load mPDF to vendor dir. After that add to your app `index.php` at the beginning
 
 ```
 require vendor/autoload.php
