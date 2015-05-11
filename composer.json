@@ -1,0 +1,33 @@
+{
+    "name": "seyfer/kohana-mpdf",
+    "version": "3.3",
+    "type": "kohana-module",
+    "description": "Kohana module to manage pdf quick and easy",
+    "type": "kohana-module",
+    "authors": [
+        {
+            "name": "seyfer",
+            "email": "seyferseed@mail.ru",
+            "homepage": "http://seyferseed.ru",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "composer/installers": "1.*",
+        "mpdf/mpdf": "5.7.4a"
+    },
+    "minimum-stability": "stable",
+    "autoload": {
+        "classmap": [
+            "classes/"
+        ]
+    },
+    "extra": {
+        "installer-paths": {
+            "vendor/kohana/modules/{$name}/": [
+                "type:kohana-module"
+            ]
+        }
+    }
+}
