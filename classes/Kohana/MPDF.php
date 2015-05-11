@@ -264,6 +264,10 @@ class Kohana_MPDF
         if ($css && is_array($css)) {
             $this->css = $css;
         }
+        
+        if (!$this->mpdf) {
+            $this->initMpdf();
+        }
 
         if (!empty($this->css) && is_array($this->css)) {
             foreach ($this->css as $css) {
