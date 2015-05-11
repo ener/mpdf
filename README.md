@@ -5,31 +5,29 @@ Extension for Kohana a PDF instead of HTML. Uses [MPDF](http://www.mpdf1.com/mpd
 Forked to fix for use View rendered templates with Kohana Smarty module.
 Now improoved with new features, like reading from string, merging PDF, etc.
 
-mPDF version 5.7 !
+mPDF version 5.7.1a !
 
 ## Installation
 
-If your application is a Git repository:
+Use Composer!
 
-    git submodule add git://github.com/seyfer/mpdf.git modules/mpdf
-    git submodule update --init
+To install from packagist [link](https://packagist.org/packages/seyfer/kohana-mpdf):
 
-Or clone the the module separately:
+```
+"seyfer/kohana-mpdf": "dev-master"
+```
 
-    cd modules
-    git clone git://github.com/seyfer/mpdf.git mpdf
-
-Or use Composer
+To install from Git:
 
     {
         "type": "package",
         "package": {
             "name": "kohana/modules/mpdf",
-            "version": "3.2",
+            "version": "3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/seyfer/kohana-mpdf.git",
-                "reference": "3.2/master"
+                "reference": "3.3/master"
             }
         }
     }
@@ -38,7 +36,11 @@ After installation go to module folder and execute
 
     composer install
 
-This will load mPDF to module vendor.
+This will load mPDF to vendor dir. After that add to your app `index.php` at the beginning
+
+```
+require vendor/autoload.php
+```
 
 ### Configuration
 

@@ -213,7 +213,8 @@ class Kohana_MPDF
     public function setDataToPdf($rhtml)
     {
         //default preferences
-        $this->mpdf->SetAutoFont(AUTOFONT_ALL);
+        //$this->mpdf->SetAutoFont(AUTOFONT_ALL);
+		$this->mpdf->autoScriptToLang = true;
         $this->mpdf->list_indent_first_level = 0;
 
         // Render the HTML to a PDF
