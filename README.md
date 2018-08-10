@@ -9,7 +9,7 @@ If your application is a Git repository:
     git submodule add git://github.com/ener/mpdf.git modules/mpdf
     git submodule update --init
 
-Or clone the the module separately:
+Or clone the module separately:
 
     cd modules
     git clone git://github.com/ener/mpdf.git mpdf
